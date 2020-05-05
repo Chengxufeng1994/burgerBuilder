@@ -53,6 +53,7 @@
     "sass-loader": "8.0.2",
     "semver": "6.3.0",
     "style-loader": "0.23.1",
+    "styled-components": "^5.1.0",
     "terser-webpack-plugin": "2.3.5",
     "ts-pnp": "1.1.6",
     "url-loader": "2.3.0",
@@ -60,6 +61,9 @@
     "webpack-dev-server": "3.10.3",
     "webpack-manifest-plugin": "2.2.0",
     "workbox-webpack-plugin": "4.3.1"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.10.7"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -134,6 +138,9 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      "babel-plugin-styled-components"
     ]
   }
 }

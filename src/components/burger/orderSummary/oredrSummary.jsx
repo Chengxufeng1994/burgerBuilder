@@ -13,13 +13,16 @@ const OredrSummary = (props) => {
     );
   });
 
-  const { handlePurchaseClosed, handlePurchaseContinued } = props;
+  const { handlePurchaseClosed, handlePurchaseContinued, totalPrice } = props;
 
   return (
     <Aux>
       <h3>Your Order</h3>
       <p>A delicious burger with the following ingredients:</p>
       <ul>{ingredientSummary}</ul>
+      <p>
+        TotalPrice: <strong>{totalPrice.toFixed(2)}</strong>
+      </p>
       <p>Continue to Checkout ?</p>
       <Button danger onClick={handlePurchaseClosed}>
         CNACEL

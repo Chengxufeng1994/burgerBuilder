@@ -2,15 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Aux from '../../hoc/aux';
+import Toolbar from '../navigation/toolbar/toolbar';
 
 const Main = styled.main`
-  margin-top: 16px;
+  margin-top: 72px;
 `;
 
 const Layout = (props) => {
   return (
     <Aux>
-      <div>Toolbar, SideDrawer, Backdrop</div>
+      <Toolbar />
       <Main>{props.children}</Main>
     </Aux>
   );

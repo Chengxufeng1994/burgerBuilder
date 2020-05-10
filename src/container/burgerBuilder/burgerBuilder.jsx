@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/aux';
 import Burger from '../../components/burger/burger';
 import BurgerControls from '../../components/burger/burgerControls/burgerControls';
+import Modal from '../../components/ui/modal/modal';
+import OrderSummary from '../../components/burger/orderSummary/oredrSummary';
 
 const INGREDIENTS_PRICE = {
   bacon: 0.7,
@@ -19,6 +21,16 @@ class BurgerBuilder extends Component {
       salad: 0,
     },
     totalPrice: 4,
+    purchasble: false,
+    purchasing: false,
+  };
+
+  updatePuchasableState = (ingredients) => {
+    const sum = Object.keys(ingredients).reduce((sum, el) => {
+      return sum + ingredients[el];
+    }, 0);
+
+    this.setState({ purchasble: sum > 0 });
   };
 
   handleAddIngredient = (type) => {
@@ -31,6 +43,7 @@ class BurgerBuilder extends Component {
     const oldPrice = totalPrice;
     const newPrice = oldPrice + priceAddition;
     this.setState({ totalPrice: newPrice, ingredients: newIngredients });
+    this.updatePuchasableState(newIngredients);
   };
 
   handleRemoveIngredient = (type) => {
@@ -46,10 +59,15 @@ class BurgerBuilder extends Component {
     if (oldPrice === 4) return;
     const newPrice = oldPrice - priceDeduction;
     this.setState({ totalPrice: newPrice, ingredients: newIngredients });
+    this.updatePuchasableState(newIngredients);
+  };
+
+  handlePurchase = () => {
+    this.setState({ purchasing: true });
   };
 
   render() {
-    const { ingredients, totalPrice } = this.state;
+    const { ingredients, totalPrice, purchasble, purchasing } = this.state;
     const disabledInfo = { ...ingredients };
 
     for (let key in disabledInfo) {
@@ -58,12 +76,17 @@ class BurgerBuilder extends Component {
 
     return (
       <Aux>
+        <Modal show={purchasing}>
+          <OrderSummary ingredients={ingredients} />
+        </Modal>
         <Burger ingredients={ingredients} />
         <BurgerControls
           disabledInfo={disabledInfo}
+          purchasble={purchasble}
           totalPrice={totalPrice}
           handleAddIngredient={this.handleAddIngredient}
           handleRemoveIngredient={this.handleRemoveIngredient}
+          handlePurchase={this.handlePurchase}
         />
       </Aux>
     );

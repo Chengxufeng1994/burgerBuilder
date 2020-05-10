@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import BurgerControl from './burgerControl/burgerControl';
+import OrderButton from './orderButton/orderButton';
 
 const ControlsArea = styled.div`
   width: 100%;
@@ -24,8 +25,10 @@ const controls = [
 const BurgerControls = (props) => {
   const {
     disabledInfo,
+    purchasble,
     handleAddIngredient,
     handleRemoveIngredient,
+    handlePurchase,
     totalPrice,
   } = props;
 
@@ -47,6 +50,7 @@ const BurgerControls = (props) => {
           handleRemoveIngredient={handleRemoveIngredient}
         />
       ))}
+      <OrderButton disabled={!purchasble} handlePurchase={handlePurchase} />
     </ControlsArea>
   );
 };

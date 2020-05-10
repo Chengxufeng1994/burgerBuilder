@@ -31,7 +31,7 @@ const Modal = (props) => {
       <Backdrop show={show} handleModalClosed={handleModalClosed} />
       <StyledModal
         style={{
-          transform: show ? 'translateY(0)' : 'translateY(100vh)',
+          transform: show ? 'translateY(0)' : 'translateY(-100vh)',
           opacity: show ? '1' : '0',
         }}
       >

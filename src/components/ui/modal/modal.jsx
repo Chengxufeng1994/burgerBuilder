@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Aux from '../../../hoc/aux';
+import Backdrop from '../backdrop/backdrop';
+
 const StyledModal = styled.div`
   position: fixed;
   z-index: 500;
@@ -21,17 +24,20 @@ const StyledModal = styled.div`
 `;
 
 const Modal = (props) => {
-  const { show } = props;
+  const { show, handleModalClosed } = props;
 
   return (
-    <StyledModal
-      style={{
-        transform: show ? 'translateY(0)' : 'translateY(100vh)',
-        opacity: show ? '1' : '0',
-      }}
-    >
-      {props.children}
-    </StyledModal>
+    <Aux>
+      <Backdrop show={show} handleModalClosed={handleModalClosed} />
+      <StyledModal
+        style={{
+          transform: show ? 'translateY(0)' : 'translateY(100vh)',
+          opacity: show ? '1' : '0',
+        }}
+      >
+        {props.children}
+      </StyledModal>
+    </Aux>
   );
 };
 

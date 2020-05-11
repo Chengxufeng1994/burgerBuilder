@@ -21,14 +21,20 @@ const StyledToolbar = styled.header`
   nav {
     height: 100%;
   }
+
+  @media (max-width: 499px) {
+    .deskonly {
+      display: none;
+    }
+  }
 `;
 
 const Toolbar = (props) => {
   return (
     <StyledToolbar>
       <div>MENU</div>
-      <Logo />
-      <nav>
+      <Logo height={80} />
+      <nav className="deskonly">
         <NavigationItems />
       </nav>
     </StyledToolbar>

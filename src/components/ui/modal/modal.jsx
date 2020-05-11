@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import Aux from '../../../hoc/aux';
+import Aux from '../../../hoc/aux/aux';
 import Backdrop from '../backdrop/backdrop';
 
 const StyledModal = styled.div`
@@ -23,22 +23,32 @@ const StyledModal = styled.div`
   }
 `;
 
-const Modal = (props) => {
-  const { show, handleModalClosed } = props;
+class Modal extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.show !== this.props.show;
+  }
 
-  return (
-    <Aux>
-      <Backdrop show={show} handleClosed={handleModalClosed} />
-      <StyledModal
-        style={{
-          transform: show ? 'translateY(0)' : 'translateY(-100vh)',
-          opacity: show ? '1' : '0',
-        }}
-      >
-        {props.children}
-      </StyledModal>
-    </Aux>
-  );
-};
+  componentWillUpdate() {
+    console.log('[Modal] willUpdate');
+  }
+
+  render() {
+    const { show, handleModalClosed } = this.props;
+
+    return (
+      <Aux>
+        <Backdrop show={show} handleClosed={handleModalClosed} />
+        <StyledModal
+          style={{
+            transform: show ? 'translateY(0)' : 'translateY(-100vh)',
+            opacity: show ? '1' : '0',
+          }}
+        >
+          {this.props.children}
+        </StyledModal>
+      </Aux>
+    );
+  }
+}
 
 export default Modal;

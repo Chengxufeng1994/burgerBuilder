@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import NavigationItems from '../navigationItems/navigationItems';
 import Logo from '../../logo/logo';
-import Aux from '../../../hoc/aux';
+import Aux from '../../../hoc/aux/aux';
 import Backdrop from '../../ui/backdrop/backdrop';
 
 const StyledSideDrawer = styled.div`

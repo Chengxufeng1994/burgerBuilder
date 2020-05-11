@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Aux from '../../hoc/aux';
-import Toolbar from '../navigation/toolbar/toolbar';
-import SideDrawer from '../navigation/sideDrawer/sideDrawer';
+import Aux from '../aux/aux';
+import Toolbar from '../../components/navigation/toolbar/toolbar';
+import SideDrawer from '../../components/navigation/sideDrawer/sideDrawer';
 
 const Main = styled.main`
   margin-top: 72px;

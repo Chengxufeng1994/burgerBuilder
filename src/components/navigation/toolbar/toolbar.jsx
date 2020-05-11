@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Logo from '../../logo/logo';
 import NavigationItems from '../navigationItems/navigationItems';
+import DrawerToggle from '../sideDrawer/drawerToggle/drawerToggle';
 
 const StyledToolbar = styled.header`
   background-color: #703b09;
@@ -30,9 +31,10 @@ const StyledToolbar = styled.header`
 `;
 
 const Toolbar = (props) => {
+  const { handelSideDrawerToggle } = props;
   return (
     <StyledToolbar>
-      <button onClick={props.handelSideDrawerOpen}>MENU</button>
+      <DrawerToggle handelSideDrawerToggle={handelSideDrawerToggle} />
       <Logo height={80} />
       <nav className="deskonly">
         <NavigationItems />

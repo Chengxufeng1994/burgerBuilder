@@ -12,8 +12,8 @@ const Main = styled.main`
 const Layout = (props) => {
   const [sideDrawerShow, setSideDrawerShow] = useState(false);
 
-  function handelSideDrawerOpen() {
-    setSideDrawerShow(true);
+  function handelSideDrawerToggle() {
+    setSideDrawerShow(!sideDrawerShow);
   }
 
   function handelSideDrawerClose() {
@@ -22,13 +22,11 @@ const Layout = (props) => {
 
   return (
     <Aux>
-      <Toolbar handelSideDrawerOpen={handelSideDrawerOpen} />
-      {sideDrawerShow ? (
-        <SideDrawer
-          handelSideDrawerClose={handelSideDrawerClose}
-          sideDrawerShow={(sideDrawerShow, handelSideDrawerClose)}
-        />
-      ) : null}
+      <Toolbar handelSideDrawerToggle={handelSideDrawerToggle} />
+      <SideDrawer
+        handelSideDrawerClose={handelSideDrawerClose}
+        sideDrawerShow={sideDrawerShow}
+      />
       <Main>{props.children}</Main>
     </Aux>
   );

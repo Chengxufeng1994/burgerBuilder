@@ -23,22 +23,22 @@ const StyledSideDrawer = styled.div`
     display: none;
   }
 
-  .open {
+  &.open {
     transform: translateX(0);
   }
 
-  .close {
+  &.close {
     transform: translateX(-100%);
   }
 `;
 
 const SideDrawer = (props) => {
   const { sideDrawerShow, handelSideDrawerClose } = props;
-  console.log(sideDrawerShow, handelSideDrawerClose);
+
   return (
     <Aux>
       <Backdrop show={sideDrawerShow} handleClosed={handelSideDrawerClose} />
-      <StyledSideDrawer>
+      <StyledSideDrawer className={sideDrawerShow ? 'open' : 'close'}>
         <Logo height={11} sideDrawer />
         <nav>
           <NavigationItems />

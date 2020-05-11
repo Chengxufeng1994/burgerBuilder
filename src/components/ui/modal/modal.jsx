@@ -28,7 +28,7 @@ const Modal = (props) => {
 
   return (
     <Aux>
-      <Backdrop show={show} handleModalClosed={handleModalClosed} />
+      <Backdrop show={show} handleClosed={handleModalClosed} />
       <StyledModal
         style={{
           transform: show ? 'translateY(0)' : 'translateY(-100vh)',

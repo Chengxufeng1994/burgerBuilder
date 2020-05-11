@@ -12,10 +12,10 @@ const StyledBackdrop = styled.div`
 `;
 
 const Backdrop = (props) => {
-  const { show, handleModalClosed } = props;
+  const { show, handleClosed } = props;
 
   return show ? (
-    <StyledBackdrop onClick={handleModalClosed}></StyledBackdrop>
+    <StyledBackdrop onClick={handleClosed}></StyledBackdrop>
   ) : null;
 };
 

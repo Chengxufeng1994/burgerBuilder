@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import NavigationItems from '../navigationItems/navigationItems';
 import Logo from '../../logo/logo';
+import Aux from '../../../hoc/aux';
+import Backdrop from '../../ui/backdrop/backdrop';
 
 const StyledSideDrawer = styled.div`
   background-color: white;
@@ -31,13 +33,18 @@ const StyledSideDrawer = styled.div`
 `;
 
 const SideDrawer = (props) => {
+  const { sideDrawerShow, handelSideDrawerClose } = props;
+  console.log(sideDrawerShow, handelSideDrawerClose);
   return (
-    <StyledSideDrawer>
-      <Logo height={11} sideDrawer/>
-      <nav>
-        <NavigationItems />
-      </nav>
-    </StyledSideDrawer>
+    <Aux>
+      <Backdrop show={sideDrawerShow} handleClosed={handelSideDrawerClose} />
+      <StyledSideDrawer>
+        <Logo height={11} sideDrawer />
+        <nav>
+          <NavigationItems />
+        </nav>
+      </StyledSideDrawer>
+    </Aux>
   );
 };
 

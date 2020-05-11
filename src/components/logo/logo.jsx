@@ -17,7 +17,6 @@ const StyledLogo = styled.div`
 `;
 
 const Logo = (props) => {
-  console.log(props);
   return (
     <StyledLogo height={props.height} sideDrawer={props.sideDrawer}>
       <img src={BurgerLogo} alt="Burger Logo" />

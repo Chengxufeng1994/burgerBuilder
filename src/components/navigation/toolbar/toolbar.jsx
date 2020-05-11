@@ -32,7 +32,7 @@ const StyledToolbar = styled.header`
 const Toolbar = (props) => {
   return (
     <StyledToolbar>
-      <div>MENU</div>
+      <button onClick={props.handelSideDrawerOpen}>MENU</button>
       <Logo height={80} />
       <nav className="deskonly">
         <NavigationItems />

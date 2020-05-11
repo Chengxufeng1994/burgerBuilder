@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Aux from '../../hoc/aux';
@@ -10,10 +10,25 @@ const Main = styled.main`
 `;
 
 const Layout = (props) => {
+  const [sideDrawerShow, setSideDrawerShow] = useState(false);
+
+  function handelSideDrawerOpen() {
+    setSideDrawerShow(true);
+  }
+
+  function handelSideDrawerClose() {
+    setSideDrawerShow(false);
+  }
+
   return (
     <Aux>
-      <Toolbar />
-      <SideDrawer />
+      <Toolbar handelSideDrawerOpen={handelSideDrawerOpen} />
+      {sideDrawerShow ? (
+        <SideDrawer
+          handelSideDrawerClose={handelSideDrawerClose}
+          sideDrawerShow={(sideDrawerShow, handelSideDrawerClose)}
+        />
+      ) : null}
       <Main>{props.children}</Main>
     </Aux>
   );

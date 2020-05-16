@@ -24,7 +24,7 @@ const StyledToolbar = styled.header`
   }
 
   @media (max-width: 499px) {
-    .deskonly {
+    .desktoponly {
       display: none;
     }
   }
@@ -36,7 +36,7 @@ const Toolbar = (props) => {
     <StyledToolbar>
       <DrawerToggle handelSideDrawerToggle={handelSideDrawerToggle} />
       <Logo height={80} />
-      <nav className="deskonly">
+      <nav className="desktoponly">
         <NavigationItems />
       </nav>
     </StyledToolbar>

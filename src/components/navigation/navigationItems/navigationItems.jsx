@@ -21,10 +21,10 @@ const Styled = styled.ul`
 const NavigationItems = (props) => {
   return (
     <Styled>
-      <NavigationItem link={'/'} active>
+      <NavigationItem link={'/'} exact>
         Burger Builder
       </NavigationItem>
-      <NavigationItem link={'/'}>Checkout</NavigationItem>
+      <NavigationItem link={'/orders'}>Orders</NavigationItem>
     </Styled>
   );
 };

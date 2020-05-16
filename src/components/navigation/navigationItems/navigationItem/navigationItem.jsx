@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const Styled = styled.li`
+  margin: 10px 0;
   box-sizing: border-box;
   display: block;
-  margin: 10px 0;
   width: 100%;
 
   a {
@@ -21,38 +22,38 @@ const Styled = styled.li`
     color: #40a4c8;
   }
 
-  @meida (min-width: 500px) {
-    display: flex;
+  @media (min-width: 500px) {
     margin: 0;
-    height: 100%
+    display: flex;
+    height: 100%;
     width: auto;
     align-items: center;
 
     a {
-      border-bottom: 4px solid transarent;
-      color: #8f5c2c;
+      color: white;
+      height: 100%;
       padding: 16px 10px;
-      width: 100%
+      border-bottom: 4px solid transparent;
     }
 
     a:hover,
     a:active,
     a.active {
-      background-color: #8f5c2c
+      background-color: #8f5c2c;
       border-bottom: 4px solid #40a4c8;
-      color: #40a4c8;
+      color: white;
     }
   }
 `;
 
 const NavigationItem = (props) => {
-  const { link, active } = props;
+  const { link, exact } = props;
 
   return (
     <Styled>
-      <a href={link} className={active ? 'active' : null}>
+      <NavLink to={link} activeClassName="active" exact={exact}>
         {props.children}
-      </a>
+      </NavLink>
     </Styled>
   );
 };

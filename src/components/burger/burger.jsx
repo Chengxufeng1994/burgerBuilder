@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styled from 'styled-components';
 import BurgerIngredient, {
   BreadTop,
@@ -11,7 +12,8 @@ const BurgerContainer = styled.div`
   width: 100%;
   margin: auto;
   height: 250px;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
   text-align: center;
   font-size: 1.2rem;
   font-weight: bold;
@@ -33,6 +35,7 @@ const BurgerContainer = styled.div`
 `;
 
 const Burger = (props) => {
+  console.log(props);
   const { ingredients } = props;
   let transformedIngredients = Object.keys(ingredients)
     .map((igKey) =>

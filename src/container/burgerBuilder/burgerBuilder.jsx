@@ -136,8 +136,41 @@ class BurgerBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
-
     let orderSummary = null;
+
+    if (ingredients) {
+      orderSummary = (
+        <OrderSummary
+          ingredients={ingredients}
+          totalPrice={totalPrice}
+          handlePurchaseClosed={this.handlePurchaseClose}
+          handlePurchaseContinued={this.handlePurchaseContinue}
+        />
+      );
+    }
+
+    if (loading) {
+      orderSummary = <Spinner />;
+    }
+
+    let burger = error ? <p> ingredients can't loaded </p> : <Spinner />;
+
+    if (ingredients) {
+      burger = (
+        <Aux>
+          <Burger ingredients={ingredients} />
+          <BurgerControls
+            disabledInfo={disabledInfo}
+            purchasble={purchasble}
+            totalPrice={totalPrice}
+            handleAddIngredient={this.handleAddIngredient}
+            handleRemoveIngredient={this.handleRemoveIngredient}
+            handlePurchase={this.handlePurchase}
+          />
+        </Aux>
+      );
+    }
+
     if (ingredients) {
       orderSummary = (
         <OrderSummary
@@ -151,8 +184,6 @@ class BurgerBuilder extends Component {
     if (loading) {
       orderSummary = <Spinner />;
     }
-
-    let burger = error ? <p> ingredients can't loaded </p> : <Spinner />;
 
     if (ingredients) {
       burger = (

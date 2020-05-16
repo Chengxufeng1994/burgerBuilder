@@ -42,7 +42,6 @@ const Burger = (props) => {
     )
     .reduce((arr, el) => arr.concat(el), []);
 
-  console.log(transformedIngredients);
   return (
     <BurgerContainer>
       <BreadTop>

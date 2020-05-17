@@ -17,11 +17,8 @@ export const Button = styled.button`
     padding-left: 0;
   }
 
-  // &.success {
-  //   color: #5c9210;
-  // }
-
-  // &.danger {
-  //   color: #944317;
-  // }
+  disabled: ${(props) => props.disabled};
+  :disabled {
+    color: #ccc;
+  }
 `;

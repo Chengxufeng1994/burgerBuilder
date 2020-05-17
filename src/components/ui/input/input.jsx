@@ -15,9 +15,9 @@ const StyledInput = styled.div`
   input,
   textarea,
   select {
-    background-color: white;
+    background-color: ${(props) => (props.inValid ? '#fda49a' : 'white')};
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: ${(props) => (props.inValid ? '1px solid red' : '1px solid #ccc')};
     font: inherit;
     padding: 6px 10px;
     outline: none;
@@ -30,10 +30,24 @@ const StyledInput = styled.div`
     background-color: #ccc;
     outline: none;
   }
+
+  .error {
+    color: red;
+    margin: 5px 0;
+  }
 `;
 
 const Input = (props) => {
-  const { label, elementType, elementConfig, value, changed } = props;
+  const {
+    label,
+    elementType,
+    elementConfig,
+    value,
+    changed,
+    inValid,
+    shouldValidate,
+    touched,
+  } = props;
 
   let inputElement = null;
 
@@ -67,10 +81,18 @@ const Input = (props) => {
       );
   }
 
+  let validationError = null;
+  if (inValid && touched) {
+    validationError = (
+      <p className="error">Please enter a valid {elementType}!</p>
+    );
+  }
+
   return (
-    <StyledInput>
+    <StyledInput inValid={inValid && shouldValidate && touched}>
       <label>{label}</label>
       {inputElement}
+      {validationError}
     </StyledInput>
   );
 };

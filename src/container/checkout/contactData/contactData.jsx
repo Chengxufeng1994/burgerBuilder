@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import axios from '../../../api/axios';
 import styled from 'styled-components';
-
 import { Button } from '../../../components/ui/button/button';
 import Spinner from '../../../components/ui/spinner/spinner';
 import Input from '../../../components/ui/input/input';
@@ -109,6 +110,7 @@ class ContactData extends Component {
         },
         value: 'fastest',
         validation: {},
+        valid: true,
       },
     },
     formIsValid: false,
@@ -117,7 +119,7 @@ class ContactData extends Component {
 
   handleOrder = (event) => {
     event.preventDefault();
-    const { ingredients, price } = this.props;
+    const { ingredients, totalprice } = this.props;
     const { orderForm } = this.state;
     const customer = {};
 
@@ -128,7 +130,7 @@ class ContactData extends Component {
     this.setState({ loading: true });
     const order = {
       ingredients: ingredients,
-      price: price,
+      price: totalprice,
       customer: customer,
     };
     axios
@@ -230,4 +232,11 @@ class ContactData extends Component {
   }
 }
 
-export default ContactData;
+const mapStateToProps = (state) => {
+  return {
+    ingredients: state.burgerBuilder.ingredients,
+    totalPrice: state.burgerBuilder.totalPrice,
+  };
+};
+
+export default connect(mapStateToProps)(ContactData);

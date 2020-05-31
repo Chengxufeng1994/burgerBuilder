@@ -9,26 +9,26 @@ const StyledSpinner = styled.div`
     width: 11em;
     height: 11em;
     border-radius: 50%;
-    background: #ffffff;
+    background: #ff9300;
     background: -moz-linear-gradient(
       left,
-      #ffffff 10%,
+      #ff9300 10%,
       rgba(255, 147, 0, 0) 42%
     );
     background: -webkit-linear-gradient(
       left,
-      #ffffff 10%,
+      #ff9300 10%,
       rgba(255, 147, 0, 0) 42%
     );
-    background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 147, 0, 0) 42%);
+    background: -o-linear-gradient(left, #ff9300 10%, rgba(255, 147, 0, 0) 42%);
     background: -ms-linear-gradient(
       left,
-      #ffffff 10%,
+      #ff9300 10%,
       rgba(255, 147, 0, 0) 42%
     );
     background: linear-gradient(
       to right,
-      #ffffff 10%,
+      #ff9300 10%,
       rgba(255, 147, 0, 0) 42%
     );
     position: relative;
@@ -38,20 +38,18 @@ const StyledSpinner = styled.div`
     -ms-transform: translateZ(0);
     transform: translateZ(0);
   }
-  
   &:before {
     width: 50%;
     height: 50%;
-    background: #ffffff;
+    background: #ff9300;
     border-radius: 100% 0 0 0;
     position: absolute;
     top: 0;
     left: 0;
     content: '';
   }
-
   &:after {
-    background: #ffffff;
+    background: #ff9300;
     width: 75%;
     height: 75%;
     border-radius: 50%;
@@ -63,7 +61,6 @@ const StyledSpinner = styled.div`
     bottom: 0;
     right: 0;
   }
-
   @-webkit-keyframes load3 {
     0% {
       -webkit-transform: rotate(0deg);
@@ -74,7 +71,6 @@ const StyledSpinner = styled.div`
       transform: rotate(360deg);
     }
   }
-
   @keyframes load3 {
     0% {
       -webkit-transform: rotate(0deg);

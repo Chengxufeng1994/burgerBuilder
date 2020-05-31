@@ -6,6 +6,9 @@ import styled from 'styled-components';
 import { Button } from '../../../components/ui/button/button';
 import Spinner from '../../../components/ui/spinner/spinner';
 import Input from '../../../components/ui/input/input';
+import WithErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+
+import { purchaseBurger } from '../../../actions';
 
 const StyledContactData = styled.div`
   text-align: center;
@@ -114,33 +117,35 @@ class ContactData extends Component {
       },
     },
     formIsValid: false,
-    loading: false,
+    // loading: false,
   };
 
   handleOrder = (event) => {
     event.preventDefault();
-    const { ingredients, totalprice } = this.props;
+
+    const { ingredients, totalPrice, purchaseBurger } = this.props;
     const { orderForm } = this.state;
     const customer = {};
 
     Object.keys(orderForm).forEach((key) => {
       customer[key] = orderForm[key].value;
     });
-
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
     const order = {
       ingredients: ingredients,
-      price: totalprice,
+      price: totalPrice,
       customer: customer,
     };
-    axios
-      .post('/order.json', order)
-      .then((response) => {
-        console.log(response);
-        this.setState({ loading: false });
-        this.props.history.push('/');
-      })
-      .catch((error) => this.setState({ loading: false }));
+
+    purchaseBurger(order);
+    // axios
+    //   .post('/order.json', order)
+    //   .then((response) => {
+    //     console.log(response);
+    //     this.setState({ loading: false });
+    //     this.props.history.push('/');
+    //   })
+    //   .catch((error) => this.setState({ loading: false }));
   };
 
   handleChange = (event, inputIdentifier) => {
@@ -185,7 +190,8 @@ class ContactData extends Component {
   };
 
   render() {
-    const { loading, orderForm, formIsValid } = this.state;
+    const { /* loading, */ orderForm, formIsValid } = this.state;
+    const { loading } = this.props;
 
     let formElementArray = [];
 
@@ -236,7 +242,17 @@ const mapStateToProps = (state) => {
   return {
     ingredients: state.burgerBuilder.ingredients,
     totalPrice: state.burgerBuilder.totalPrice,
+    loading: state.order.loading,
   };
 };
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    purchaseBurger: (orderData) => dispatch(purchaseBurger(orderData)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WithErrorHandler(ContactData, axios));

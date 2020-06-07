@@ -37,7 +37,7 @@ const StyledInput = styled.div`
   }
 `;
 
-const Input = (props) => {
+const Input = React.memo((props) => {
   const {
     label,
     elementType,
@@ -95,6 +95,6 @@ const Input = (props) => {
       {validationError}
     </StyledInput>
   );
-};
+});
 
 export default Input;

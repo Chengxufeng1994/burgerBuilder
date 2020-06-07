@@ -32,6 +32,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
+        {/* <BrowserRouter basename="cheng-burger"> */}
         <BrowserRouter>
           <App />
         </BrowserRouter>

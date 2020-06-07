@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MuiButton = (props) => {
-  const { className, color, size, children } = props;
+  const { className, color, size, children, ...otherProps } = props;
   const classes = useStyles(props);
 
   return (
@@ -27,6 +27,7 @@ const MuiButton = (props) => {
       color={color}
       size={size}
       variant="contained"
+      {...otherProps}
     >
       {children}
     </Button>

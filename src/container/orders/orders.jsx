@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import axios from '../../api/axios';
@@ -6,52 +6,32 @@ import Order from '../../components/order/order';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import Spinner from '../../components/ui/spinner/spinner';
 import { fetchOrders } from '../../actions';
-class Orders extends Component {
-  // state = {
-  //   orders: [],
-  //   loading: true,
-  // };
 
-  componentDidMount() {
-    const { fetchOrders, token, userId } = this.props;
+const Orders = (props) => {
+  const { orders, loading, fetchOrders, token, userId } = props;
+
+  useEffect(() => {
     fetchOrders(token, userId);
-    // axios
-    //   .get('/orders.json')
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     const fetchedOrders = [];
-    //     for (let key in response.data) {
-    //       fetchedOrders.push({ ...response.data[key], id: key });
-    //     }
-    //     console.log(fetchedOrders);
-    //     this.setState({ loading: false, orders: fetchedOrders });
-    //   })
-    //   .catch((error) => console.log(error));
-  }
+  }, [fetchOrders, token, userId]);
 
-  render() {
-    const { orders, loading } = this.props;
-
-    return loading ? (
-      <Spinner />
-    ) : (
-      <div>
-        {orders.map((order) => {
-          return (
-            <Order
-              key={order.id}
-              ingredients={order.ingredients}
-              price={order.price}
-            />
-          );
-        })}
-      </div>
-    );
-  }
-}
+  return loading ? (
+    <Spinner />
+  ) : (
+    <div>
+      {orders.map((order) => {
+        return (
+          <Order
+            key={order.id}
+            ingredients={order.ingredients}
+            price={order.price}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => {
-  // console.log(state);
   return {
     orders: state.order.orders,
     loading: state.order.loading,

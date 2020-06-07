@@ -35,7 +35,7 @@ const BurgerContainer = styled.div`
 `;
 
 const Burger = (props) => {
-  console.log(props);
+  // console.log(props);
   const { ingredients } = props;
   let transformedIngredients = Object.keys(ingredients)
     .map((igKey) =>

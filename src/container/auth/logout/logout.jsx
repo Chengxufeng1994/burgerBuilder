@@ -7,7 +7,7 @@ class Logout extends Component {
   componentDidMount() {
     const { authLogout } = this.props;
     authLogout();
-    console.log('[AuthLogout] Success!!!');
+    // console.log('[AuthLogout] Success!!!');
   }
 
   render() {

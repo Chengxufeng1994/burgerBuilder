@@ -10,6 +10,8 @@ import WithErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 
 import { purchaseBurger } from '../../../actions';
 
+import { updateObject, checkValidity } from '../../../util/utility';
+
 const StyledContactData = styled.div`
   text-align: center;
   width: 80%;
@@ -155,16 +157,23 @@ class ContactData extends Component {
     const target = event.target;
     const value = target.value;
     const { orderForm } = this.state;
-    const updateOrderForm = { ...orderForm };
-    const updateOrderFormElement = { ...updateOrderForm[inputIdentifier] };
-
-    updateOrderFormElement.value = value;
-    updateOrderFormElement.valid = this.checkValidity(
-      updateOrderFormElement.value,
-      updateOrderFormElement.validation
-    );
-    updateOrderFormElement.touch = true;
-    updateOrderForm[inputIdentifier] = updateOrderFormElement;
+    const updateOrderFormElement = updateObject(orderForm[inputIdentifier], {
+      value: value,
+      valid: checkValidity(value, orderForm[inputIdentifier].validation),
+      touch: true,
+    });
+    const updateOrderForm = updateObject(orderForm, {
+      [inputIdentifier]: updateOrderFormElement,
+    });
+    // const updateOrderForm = { ...orderForm };
+    // const updateOrderFormElement = { ...updateOrderForm[inputIdentifier] };
+    // updateOrderFormElement.value = value;
+    // updateOrderFormElement.valid = this.checkValidity(
+    //   updateOrderFormElement.value,
+    //   updateOrderFormElement.validation
+    // );
+    // updateOrderFormElement.touch = true;
+    // updateOrderForm[inputIdentifier] = updateOrderFormElement;
 
     let formIsValid = true;
     for (let inputIdentifier in updateOrderForm) {
@@ -174,36 +183,36 @@ class ContactData extends Component {
     this.setState({ orderForm: updateOrderForm, formIsValid });
   };
 
-  checkValidity(value, rules) {
-    let isValid = true;
-    if (!rules) {
-      return true;
-    }
+  // checkValidity(value, rules) {
+  //   let isValid = true;
+  //   if (!rules) {
+  //     return true;
+  //   }
 
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
+  //   if (rules.required) {
+  //     isValid = value.trim() !== '' && isValid;
+  //   }
 
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
+  //   if (rules.minLength) {
+  //     isValid = value.length >= rules.minLength && isValid;
+  //   }
 
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
+  //   if (rules.maxLength) {
+  //     isValid = value.length <= rules.maxLength && isValid;
+  //   }
 
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid;
-    }
+  //   if (rules.isEmail) {
+  //     const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+  //     isValid = pattern.test(value) && isValid;
+  //   }
 
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid;
-    }
+  //   if (rules.isNumeric) {
+  //     const pattern = /^\d+$/;
+  //     isValid = pattern.test(value) && isValid;
+  //   }
 
-    return isValid;
-  }
+  //   return isValid;
+  // }
 
   render() {
     const { /* loading, */ orderForm, formIsValid } = this.state;

@@ -7,6 +7,7 @@ import Input from '../../components/ui/input/input';
 import { Button } from '../../components/ui/button/button';
 import Spinner from '../../components/ui/spinner/spinner.jsx';
 import { auth, setAuthRedirectPath } from '../../actions';
+import { updateObject, checkValidity } from '../../util/utility';
 
 const Styled = styled.div`
   text-align: center;
@@ -87,16 +88,22 @@ class Auth extends Component {
     // );
     // updateOrderFormElement.touch = true;
     // updateOrderForm[controlName] = updateOrderFormElement;
-
-    const updateControls = {
-      ...controls,
-      [controlName]: {
-        ...controls[controlName],
+    // const updateControls = {
+    //   ...controls,
+    //   [controlName]: {
+    //     ...controls[controlName],
+    //     value: value,
+    //     valid: this.checkValidity(value, controls[controlName].validation),
+    //     touch: true,
+    //   },
+    // };
+    const updateControls = updateObject(controls, {
+      [controlName]: updateObject(controls[controlName], {
         value: value,
-        valid: this.checkValidity(value, controls[controlName].validation),
+        valid: checkValidity(value, controls[controlName].validation),
         touch: true,
-      },
-    };
+      }),
+    });
 
     // let formIsValid = true;
 
@@ -117,36 +124,36 @@ class Auth extends Component {
     auth(controls.email.value, controls.password.value, method);
   };
 
-  checkValidity(value, rules) {
-    let isValid = true;
-    if (!rules) {
-      return true;
-    }
+  // checkValidity(value, rules) {
+  //   let isValid = true;
+  //   if (!rules) {
+  //     return true;
+  //   }
 
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
+  //   if (rules.required) {
+  //     isValid = value.trim() !== '' && isValid;
+  //   }
 
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
+  //   if (rules.minLength) {
+  //     isValid = value.length >= rules.minLength && isValid;
+  //   }
 
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
+  //   if (rules.maxLength) {
+  //     isValid = value.length <= rules.maxLength && isValid;
+  //   }
 
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid;
-    }
+  //   if (rules.isEmail) {
+  //     const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+  //     isValid = pattern.test(value) && isValid;
+  //   }
 
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid;
-    }
+  //   if (rules.isNumeric) {
+  //     const pattern = /^\d+$/;
+  //     isValid = pattern.test(value) && isValid;
+  //   }
 
-    return isValid;
-  }
+  //   return isValid;
+  // }
 
   toggleAuthMode = () => {
     this.setState((prevState) => {

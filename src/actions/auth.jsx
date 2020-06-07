@@ -51,7 +51,7 @@ export const auth = (email, password, method) => (dispatch) => {
     authData
   )
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       // console.log(response.data);
       const { idToken, localId, expiresIn } = response.data;
       const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);

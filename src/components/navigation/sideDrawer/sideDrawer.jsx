@@ -38,7 +38,10 @@ const SideDrawer = (props) => {
   return (
     <Aux>
       <Backdrop show={sideDrawerShow} handleClosed={handelSideDrawerClose} />
-      <StyledSideDrawer className={sideDrawerShow ? 'open' : 'close'}>
+      <StyledSideDrawer
+        className={sideDrawerShow ? 'open' : 'close'}
+        onClick={handelSideDrawerClose}
+      >
         <Logo height={11} sideDrawer />
         <nav>
           <NavigationItems isAuthenticated={isAuth} />

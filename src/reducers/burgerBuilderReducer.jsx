@@ -5,6 +5,7 @@ const initialState = {
   ingredients: null,
   totalPrice: 4,
   error: false,
+  building: false,
 };
 const INGREDIENTS_PRICE = {
   bacon: 0.7,
@@ -20,6 +21,7 @@ const addIngredient = (state, action) => {
   const updateState = {
     ingredients: updateIngredients,
     totalPrice: state.totalPrice + INGREDIENTS_PRICE[action.payload],
+    building: true,
   };
   return updateObject(state, updateState);
 };
@@ -31,6 +33,7 @@ const removeIngredient = (state, action) => {
   const updateState = {
     ingredients: updateIngredients,
     totalPrice: state.totalPrice - INGREDIENTS_PRICE[action.payload],
+    building: true,
   };
   return updateObject(state, updateState);
 };
@@ -44,10 +47,12 @@ const initIngredients = (state, action) => {
     },
     totalPrice: 4,
     error: false,
+    building: false,
   };
 
   return updateObject(state, initObject);
 };
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.INIT_INGREDIENTS: {

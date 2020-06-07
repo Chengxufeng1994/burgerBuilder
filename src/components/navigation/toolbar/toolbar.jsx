@@ -31,13 +31,13 @@ const StyledToolbar = styled.header`
 `;
 
 const Toolbar = (props) => {
-  const { handelSideDrawerToggle } = props;
+  const { handelSideDrawerToggle, isAuth } = props;
   return (
     <StyledToolbar>
       <DrawerToggle handelSideDrawerToggle={handelSideDrawerToggle} />
       <Logo height={80} />
       <nav className="desktoponly">
-        <NavigationItems />
+        <NavigationItems isAuthenticated={isAuth} />
       </nav>
     </StyledToolbar>
   );

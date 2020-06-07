@@ -13,8 +13,8 @@ class Orders extends Component {
   // };
 
   componentDidMount() {
-    const { fetchOrders } = this.props;
-    fetchOrders();
+    const { fetchOrders, token, userId } = this.props;
+    fetchOrders(token, userId);
     // axios
     //   .get('/orders.json')
     //   .then((response) => {
@@ -51,9 +51,12 @@ class Orders extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     orders: state.order.orders,
     loading: state.order.loading,
+    token: state.auth.token,
+    userId: state.auth.userId,
   };
 };
 

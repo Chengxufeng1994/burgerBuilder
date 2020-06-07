@@ -4,11 +4,6 @@ export {
   removeIngredient,
 } from './burgerBuilder';
 
-export {
-  purchaseBurgerFail,
-  purchaseBurgerSuccess,
-  purchaseBurgerStart,
-  purchaseBurger,
-  purchaseInit,
-  fetchOrders,
-} from './order';
+export { purchaseBurger, purchaseInit, fetchOrders } from './order';
+
+export { auth, authLogout, setAuthRedirectPath, authCheckState } from './auth';

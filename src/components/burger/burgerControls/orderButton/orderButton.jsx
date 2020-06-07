@@ -43,10 +43,10 @@ const StyledOrderButton = styled.button`
 `;
 
 const OrderButton = (props) => {
-  const { disabled, handlePurchase } = props;
+  const { disabled, handlePurchase, isAuth } = props;
   return (
     <StyledOrderButton disabled={disabled} onClick={handlePurchase}>
-      SIGN UP TO ORDER
+      {isAuth ? 'ORDER NOW' : 'SIGN UP TO ORDER'}
     </StyledOrderButton>
   );
 };

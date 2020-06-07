@@ -33,7 +33,7 @@ const StyledSideDrawer = styled.div`
 `;
 
 const SideDrawer = (props) => {
-  const { sideDrawerShow, handelSideDrawerClose } = props;
+  const { sideDrawerShow, handelSideDrawerClose, isAuth } = props;
 
   return (
     <Aux>
@@ -41,7 +41,7 @@ const SideDrawer = (props) => {
       <StyledSideDrawer className={sideDrawerShow ? 'open' : 'close'}>
         <Logo height={11} sideDrawer />
         <nav>
-          <NavigationItems />
+          <NavigationItems isAuthenticated={isAuth} />
         </nav>
       </StyledSideDrawer>
     </Aux>

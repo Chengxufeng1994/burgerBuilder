@@ -34,7 +34,7 @@ class ContactData extends Component {
       name: {
         elementType: 'input',
         elementConfig: {
-          text: 'text',
+          type: 'text',
           placeholder: 'Your Name',
         },
         value: '',
@@ -42,37 +42,39 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
-        touch: false,
+        touched: false,
       },
       email: {
         elementType: 'input',
         elementConfig: {
-          text: 'text',
-          placeholder: 'Your Email',
+          type: 'email',
+          placeholder: 'Your E-Mail',
+        },
+        value: '',
+        validation: {
+          required: true,
+          isEmail: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      street: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Street',
         },
         value: '',
         validation: {
           required: true,
         },
         valid: false,
-        touch: false,
-      },
-      street: {
-        elementType: 'input',
-        elementConfig: {
-          text: 'text',
-          placeholder: 'Street',
-        },
-        validation: {
-          required: true,
-        },
-        valid: false,
-        touch: false,
+        touched: false,
       },
       country: {
         elementType: 'input',
         elementConfig: {
-          text: 'text',
+          type: 'text',
           placeholder: 'Country',
         },
         value: '',
@@ -80,35 +82,30 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
-        touch: false,
+        touched: false,
       },
       zipCode: {
         elementType: 'input',
         elementConfig: {
-          text: 'text',
-          placeholder: 'ZIP CODE',
+          type: 'text',
+          placeholder: 'ZIP Code',
         },
         value: '',
         validation: {
           required: true,
           minLength: 5,
           maxLength: 5,
+          isNumeric: true,
         },
         valid: false,
-        touch: false,
+        touched: false,
       },
       deliveryMethod: {
         elementType: 'select',
         elementConfig: {
           options: [
-            {
-              value: 'fastest',
-              displayValue: 'Fastest',
-            },
-            {
-              value: 'cheapest',
-              displayValue: 'Cheapest',
-            },
+            { value: 'fastest', displayValue: 'Fastest' },
+            { value: 'cheapest', displayValue: 'Cheapest' },
           ],
         },
         value: 'fastest',
@@ -117,13 +114,18 @@ class ContactData extends Component {
       },
     },
     formIsValid: false,
-    // loading: false,
   };
 
   handleOrder = (event) => {
     event.preventDefault();
 
-    const { ingredients, totalPrice, purchaseBurger } = this.props;
+    const {
+      ingredients,
+      totalPrice,
+      purchaseBurger,
+      token,
+      userId,
+    } = this.props;
     const { orderForm } = this.state;
     const customer = {};
 
@@ -135,9 +137,10 @@ class ContactData extends Component {
       ingredients: ingredients,
       price: totalPrice,
       customer: customer,
+      userId: userId,
     };
 
-    purchaseBurger(order);
+    purchaseBurger(order, token);
     // axios
     //   .post('/order.json', order)
     //   .then((response) => {
@@ -171,8 +174,11 @@ class ContactData extends Component {
     this.setState({ orderForm: updateOrderForm, formIsValid });
   };
 
-  checkValidity = (value, rules) => {
+  checkValidity(value, rules) {
     let isValid = true;
+    if (!rules) {
+      return true;
+    }
 
     if (rules.required) {
       isValid = value.trim() !== '' && isValid;
@@ -186,8 +192,18 @@ class ContactData extends Component {
       isValid = value.length <= rules.maxLength && isValid;
     }
 
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
+    }
+
+    if (rules.isNumeric) {
+      const pattern = /^\d+$/;
+      isValid = pattern.test(value) && isValid;
+    }
+
     return isValid;
-  };
+  }
 
   render() {
     const { /* loading, */ orderForm, formIsValid } = this.state;
@@ -243,12 +259,15 @@ const mapStateToProps = (state) => {
     ingredients: state.burgerBuilder.ingredients,
     totalPrice: state.burgerBuilder.totalPrice,
     loading: state.order.loading,
+    token: state.auth.token,
+    userId: state.auth.userId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    purchaseBurger: (orderData) => dispatch(purchaseBurger(orderData)),
+    purchaseBurger: (orderData, token) =>
+      dispatch(purchaseBurger(orderData, token)),
   };
 };
 

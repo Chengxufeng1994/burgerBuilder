@@ -30,6 +30,7 @@ const BurgerControls = (props) => {
     handleRemoveIngredient,
     handlePurchase,
     totalPrice,
+    isAuth,
   } = props;
 
   return (
@@ -50,7 +51,11 @@ const BurgerControls = (props) => {
           handleRemoveIngredient={handleRemoveIngredient}
         />
       ))}
-      <OrderButton disabled={!purchasble} handlePurchase={handlePurchase} />
+      <OrderButton
+        disabled={!purchasble}
+        handlePurchase={handlePurchase}
+        isAuth={isAuth}
+      />
     </ControlsArea>
   );
 };

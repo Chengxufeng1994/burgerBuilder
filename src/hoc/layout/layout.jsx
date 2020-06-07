@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Aux from '../aux/aux';
@@ -11,6 +12,7 @@ const Main = styled.main`
 
 const Layout = (props) => {
   const [sideDrawerShow, setSideDrawerShow] = useState(false);
+  const { isAuthenticated } = props;
 
   function handelSideDrawerToggle() {
     setSideDrawerShow(!sideDrawerShow);
@@ -22,8 +24,12 @@ const Layout = (props) => {
 
   return (
     <Aux>
-      <Toolbar handelSideDrawerToggle={handelSideDrawerToggle} />
+      <Toolbar
+        isAuth={isAuthenticated}
+        handelSideDrawerToggle={handelSideDrawerToggle}
+      />
       <SideDrawer
+        isAuth={isAuthenticated}
         handelSideDrawerClose={handelSideDrawerClose}
         sideDrawerShow={sideDrawerShow}
       />
@@ -32,4 +38,10 @@ const Layout = (props) => {
   );
 };
 
-export default Layout;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

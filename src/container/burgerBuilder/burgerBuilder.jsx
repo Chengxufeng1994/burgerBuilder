@@ -23,7 +23,7 @@ import {
 //   meat: 1.3,
 //   salad: 0.5,
 // };
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
   state = {
     // ingredients: null,
     // totalPrice: 4,

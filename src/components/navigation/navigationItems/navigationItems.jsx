@@ -26,12 +26,12 @@ const NavigationItems = (props) => {
         Burger Builder
       </NavigationItem>
       {isAuthenticated ? (
-        <NavigationItem link={'/orders'}>Orders</NavigationItem>
-      ) : null}
-      {!isAuthenticated ? (
-        <NavigationItem link={'/auth'}>Authenticate</NavigationItem>
+        <>
+          <NavigationItem link={'/orders'}>Orders</NavigationItem>
+          <NavigationItem link={'/logout'}>Logout</NavigationItem>
+        </>
       ) : (
-        <NavigationItem link={'/logout'}>Logout</NavigationItem>
+        <NavigationItem link={'/auth'}>Authenticate</NavigationItem>
       )}
       {/* <NavigationItem link={'/auth'}>Authenticate</NavigationItem> */}
     </Styled>

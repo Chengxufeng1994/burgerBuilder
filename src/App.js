@@ -10,8 +10,7 @@ import BurgerBuilder from './container/burgerBuilder/burgerBuilder';
 // import Auth from './container/auth/auth';
 import AuthLogout from './container/auth/logout/logout';
 
-import { authCheckState } from './actions'
-;
+import { authCheckState } from './actions';
 const asyncCheckout = asyncComponent(() => {
   return import('./container/checkout/checkout');
 });
@@ -22,7 +21,7 @@ const asyncAuth = asyncComponent(() => {
   return import('./container/auth/auth');
 });
 
-class App extends Component {
+export class App extends Component {
   componentDidMount() {
     const { onTryAutoSignup } = this.props;
     onTryAutoSignup();

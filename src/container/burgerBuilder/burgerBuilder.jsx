@@ -33,9 +33,7 @@ export const BurgerBuilder = (props) => {
   const ingredients = useSelector((state) => state.burgerBuilder.ingredients);
   const totalPrice = useSelector((state) => state.burgerBuilder.totalPrice);
   const error = useSelector((state) => state.burgerBuilder.error);
-  const isAuthenticated = useSelector(
-    (state) => state.burgerBuilder.isAuthenticated
-  );
+  const isAuthenticated = useSelector((state) => state.burgerBuilder.isAuthenticated);
 
   useEffect(() => {
     onInitIngredients();

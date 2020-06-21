@@ -81,7 +81,7 @@ export default (state = initialState, action) => {
       // return updateObject(state, initObject);
     }
     case actionTypes.FETCH_INGREDIENTS_FAIL: {
-      return updateObject(...state, { error: true });
+      return updateObject(state, { error: true });
       // return { ...state, error: true };
     }
     case actionTypes.ADD_INGREDIENT: {

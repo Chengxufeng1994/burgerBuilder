@@ -75,7 +75,7 @@ const Auth = (props) => {
     if (!buildingBurger && authRedirectPath !== '/') {
       setAuthRedirectPath();
     }
-  });
+  }, [buildingBurger, authRedirectPath, setAuthRedirectPath]);
 
   const handleChange = (event, controlName) => {
     const target = event.target;

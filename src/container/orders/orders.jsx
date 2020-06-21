@@ -12,7 +12,7 @@ const Orders = (props) => {
 
   useEffect(() => {
     fetchOrders(token, userId);
-  }, [fetchOrders]);
+  }, [fetchOrders, token, userId]);
 
   return loading ? (
     <Spinner />

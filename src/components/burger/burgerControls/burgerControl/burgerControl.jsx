@@ -80,4 +80,4 @@ const BurgerControl = React.memo((props) => {
   );
 });
 
-export default BurgerControl;
+export default React.memo(BurgerControl);

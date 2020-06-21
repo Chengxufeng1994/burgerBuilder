@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -115,40 +115,38 @@ const Bacon = styled.div`
   margin: 2% auto;
 `;
 
-class BurgerIngredient extends Component {
-  render() {
-    const { type } = this.props;
-    let ingredient = null;
+const BurgerIngredient = (props) => {
+  const { type } = props;
+  let ingredient = null;
 
-    switch (type) {
-      case 'bread-bottom':
-        ingredient = <BreadBottom />;
-        break;
-      case 'bread-top':
-        ingredient = (
-          <BreadTop>
-            <Seeds1 />
-            <Seeds2 />
-          </BreadTop>
-        );
-        break;
-      case 'bacon':
-        ingredient = <Bacon />;
-        break;
-      case 'cheese':
-        ingredient = <Cheese />;
-        break;
-      case 'meat':
-        ingredient = <Meat />;
-        break;
-      case 'salad':
-        ingredient = <Salad />;
-        break;
-      default:
-    }
-    return ingredient;
+  switch (type) {
+    case 'bread-bottom':
+      ingredient = <BreadBottom />;
+      break;
+    case 'bread-top':
+      ingredient = (
+        <BreadTop>
+          <Seeds1 />
+          <Seeds2 />
+        </BreadTop>
+      );
+      break;
+    case 'bacon':
+      ingredient = <Bacon />;
+      break;
+    case 'cheese':
+      ingredient = <Cheese />;
+      break;
+    case 'meat':
+      ingredient = <Meat />;
+      break;
+    case 'salad':
+      ingredient = <Salad />;
+      break;
+    default:
   }
-}
+  return ingredient;
+};
 
 BurgerIngredient.propTypes = {
   type: PropTypes.string.isRequired,

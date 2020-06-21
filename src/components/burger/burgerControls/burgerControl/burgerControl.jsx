@@ -54,7 +54,7 @@ const Control = styled.div`
   }
 `;
 
-const BurgerControl = (props) => {
+const BurgerControl = React.memo((props) => {
   const {
     label,
     type,
@@ -78,6 +78,6 @@ const BurgerControl = (props) => {
       </button>
     </Control>
   );
-};
+});
 
 export default BurgerControl;
